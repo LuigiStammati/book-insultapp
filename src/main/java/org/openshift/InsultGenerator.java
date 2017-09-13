@@ -35,7 +35,7 @@ public class InsultGenerator {
 				connection.close();
 			}
 		} catch (Exception e) {
-			return "Database connection problem!";
+			return "Either the database is empty or there was a connection problem!";
 		}
 		return theInsult;
 	}
