@@ -63,6 +63,7 @@ Click on Create
 19) Empty database? You need to populate it. Either on the crappy web terminal (right-click, paste) or with the superb oc exec tool, execute the following on the firefly POD:
 
 env | grep SQL
+more insults.sql
 psql -h $POSTGRESQL_SERVICE_HOST -p $POSTGRESQL_SERVICE_PORT -U $POSTGRESQL_USER $POSTGRESQL_DATABASE < insults.sql
 
 20) Try the URL again... and again... but please don't be offended, it's not personal.
