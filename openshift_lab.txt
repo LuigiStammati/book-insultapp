@@ -1,0 +1,72 @@
+1) If you don't have one, create a GitHub account at http://github.com 
+
+2) If you don't have it, get yourself access to Openshift Online https://manage.openshift.com/
+
+3) Open Openshift web console
+
+4) Create a project and give it the name you want
+
+5) Enter the search pattern postgresql , and click on the bottom hit, called Data Stores: PostgreSQL (Persistent)
+
+6) Specify the values that you want (but remember them) for:
+
+PostgreSQL Connection Username: let's call it <USER>
+PostgreSQL Connection Password: let's call it <PASSWORD>
+PostgreSQL Database Name: let's call it <DBNAME>
+
+7) Click on Create
+
+8) [Optional] On the next screen, take advantage of the opportunity they give you to install the "oc" tool for your OS.
+You can do "oc login" and then throughout the lab execute oc commands, which are a similar to kubectl commands.
+
+9) Click on Continue to Overview, then Click on Applications > PODs... and see the different PODs that get started, stopped, and sometimes deleted.
+
+10) Once there is a POD running and named postgresql-<four_letters>, click on it. 
+
+11) Click on Terminal. Execute the following on the terminal:
+
+ps -ef
+psql
+\dt   # Nothing here, the DB is empty
+\q    # You leave the DB
+
+12) Go to https://github.com/virtualhops/book-insultapp and click on Fork
+
+Congrats, now you have your own repository for book-insultapp. Its URL is:
+
+https://github.com/<your_github_username>/book-insultapp
+
+Copy that value, let's call it <GITHUB_REPO_URL>
+
+Please check the main java code of the repo:
+
+https://github.com/<your_github_username>/book-insultapp/blob/master/src/main/java/org/openshift/InsultGenerator.java
+
+13) On Openshift , click on Applications > Deployments , then on Add to Project (it's on top of the page). Select Browse Catalog.
+
+14) Enter wildfly search pattern... it's a java application engine. It will at some point execute your java code on <GITHUB_REPO_URL>. Just Select.
+
+15) Give a name to the new deployment, and specify your <GITHUB_REPO_URL>
+
+16) Click on advanced options and fill in the following environment variables that you copied in previous steps.
+
+POSTGRESQL_DATABASE=<DBNAME>
+POSTGRESQL_USER=<USER>
+POSTGRESQL_PASSWORD=<PASSWORD>
+
+Click on Create
+
+17) Click on Applications > PODs... and see the different PODs that get started, stopped, and sometimes deleted. Give it some time.
+
+18) Click on Click on Continue to Overview... there is an URL route that you can check... NOTE: it may take a few minutes to get set up by RedHat, during that time it will say "Application is not available".
+
+19) Empty database? You need to populate it. Either on the crappy web terminal or with the superb oc tool, execute the following on the firefly POD:
+
+env | grep SQL
+psql -h $POSTGRESQL_SERVICE_HOST -p $POSTGRESQL_SERVICE_PORT -U $POSTGRESQL_USER $POSTGRESQL_DATABASE < insults.sql
+
+20) Try the URL again... and again... but please don't be offended, it's not personal.
+
+21) Delete the project... you will need the resources for the next lab:
+
+https://github.com/savithruml/openshift-contrail/blob/master/README.md
