@@ -60,7 +60,7 @@ Click on Create
 
 18) Click on Click on Continue to Overview... there is an URL route that you can check... NOTE: it may take a few minutes to get set up by RedHat, during that time it will say "Application is not available".
 
-19) Empty database? You need to populate it. Either on the crappy web terminal or with the superb oc tool, execute the following on the firefly POD:
+19) Empty database? You need to populate it. Either on the crappy web terminal (right-click, paste) or with the superb oc exec tool, execute the following on the firefly POD:
 
 env | grep SQL
 psql -h $POSTGRESQL_SERVICE_HOST -p $POSTGRESQL_SERVICE_PORT -U $POSTGRESQL_USER $POSTGRESQL_DATABASE < insults.sql
